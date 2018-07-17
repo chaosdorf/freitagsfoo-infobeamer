@@ -2,8 +2,9 @@ gl.setup(1024, 600)
 
 local ytrans = 0
 local atrans = 0
-local transition = true
+local transition = false
 local screen = "title"
+local start_time = sys.now()
 
 -- colored rectangle
 local bluerect = resource.create_colored_texture(0, 164/255, 183/255, 0.7)
@@ -16,6 +17,10 @@ function node.render()
         -- rectangle
         bluerect:draw(0, 350 + ytrans, 1024, 600 + (ytrans*1.2), 2 - atrans)
         resource.render_child("title_screen"):draw(0, 350 + ytrans, 1024, 600 + (ytrans*1.2), 1 + atrans)
+        
+        if sys.now() > start_time + 10 then
+            transition = true
+        end
         
         if transition then
             ytrans = ytrans - 8
