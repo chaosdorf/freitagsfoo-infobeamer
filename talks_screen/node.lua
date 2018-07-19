@@ -26,7 +26,7 @@ function node.render()
         end
     end
     
-    cpmono:write(20, 375, "Add yours at https://wiki.chaosdorf.de/Freitagsfoo/1970-01-01", 25, 1, 1, 1, 1, 1)
+    cpmono:write(20, 375, "Add yours at https://wiki.chaosdorf.de/Freitagsfoo/" .. current_data["date"], 25, 1, 1, 1, 1, 1)
 end
 
 local content = resource.load_file("freitagsfoo.json")
