@@ -10,7 +10,12 @@
         {
             "title": "some other talk",
             "description": "blah",
-            "persons": ["person A", "person B"]
+            "persons": ["person B", "person C"]
+        },
+        {
+            "title": "even more talks!",
+            "description": "foo bar",
+            "persons": ["abc"]
         }
     ]
 }
