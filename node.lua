@@ -15,7 +15,7 @@ function node.render()
     
     if screen == "title" then
         -- rectangle
-        bluerect:draw(0, 350 + ytrans, 1024, 600 + (ytrans*1.2), 2 - atrans)
+        resource.render_child("talks_title"):draw(0, 350 + ytrans, 1024, 600 + (ytrans*1.2), 0 - atrans)
         resource.render_child("title_screen"):draw(0, 350 + ytrans, 1024, 600 + (ytrans*1.2), 1 + atrans)
         
         if sys.now() > start_time + 10 then
@@ -32,7 +32,7 @@ function node.render()
             end
         end
     elseif screen == "talks" then
-        bluerect:draw(0, 0, 1024, 180)
+        resource.render_child("talks_title"):draw(0, 0, 1024, 180)
         resource.render_child("talks_screen"):draw(0, 180, 1024, 600, 1 + atrans)
         if atrans < 0 then
             atrans = atrans + 0.025
