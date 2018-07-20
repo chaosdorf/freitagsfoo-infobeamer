@@ -24,5 +24,6 @@ function node.render()
     cpmono:write(650, 125, current_data["date"], 50, 1, 1, 1, 1, 1)
 end
 
-local content = resource.load_file("freitagsfoo.json")
-current_data = json.decode(content)
+util.file_watch("freitagsfoo.json", function(content)
+    current_data = json.decode(content)
+end)
