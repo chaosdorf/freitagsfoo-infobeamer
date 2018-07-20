@@ -2,6 +2,9 @@
     "name": "Freitagsfoo",
     "optional": [
         "screenshot.png",
+        "screenshot2.png",
+        "python/freitagsfoo.py",
+        "python/requirements.txt",
         "package.png",
         "README.md"
     ]
