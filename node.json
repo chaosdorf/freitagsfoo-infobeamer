@@ -1,5 +1,8 @@
 {
     "name": "Freitagsfoo",
+    "permissions": {
+        "network": "needs to fetch talk data"
+    },
     "optional": [
         "screenshot.png",
         "screenshot2.png",

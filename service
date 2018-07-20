@@ -1,0 +1,20 @@
+#!/usr/bin/python2.7
+
+URL = "https://www.chaosdorf.de/~ytvwld/freitagsfoo.json"
+
+from time import sleep, time
+from requests import Session
+import shutil
+
+session = Session()
+while True:
+    r = session.get(URL)
+    curr_time = time()
+    filename = "freitagsfoo-%s.json" % str(curr_time)
+    f = open(filename, "w")
+    f.write(r.text)
+    f.close()
+    shutil.copy(filename, "freitagsfoo.json")
+    shutil.copy(filename, "talks_screen/freitagsfoo.json")
+    shutil.copy(filename, "title_screen/freitagsfoo.json")
+    sleep(60)
