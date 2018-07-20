@@ -5,6 +5,7 @@ URL = "https://www.chaosdorf.de/~ytvwld/freitagsfoo.json"
 from time import sleep, time
 from requests import Session
 import shutil
+import os
 
 session = Session()
 while True:
@@ -17,4 +18,5 @@ while True:
     shutil.copy(filename, "freitagsfoo.json")
     shutil.copy(filename, "talks_screen/freitagsfoo.json")
     shutil.copy(filename, "title_screen/freitagsfoo.json")
+    os.remove(filename)
     sleep(60)
