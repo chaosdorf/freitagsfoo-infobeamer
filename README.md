@@ -4,7 +4,11 @@ This software is meant to be used on info-beamer during a [Freitagsfoo](https://
 
 > ![screenshot](screenshot.png)
 > 
-> *This is how it looks.*
+> *title screen*
+
+> ![screenshot2](screenshot2.png)
+> 
+> *talks screen*
 
 ## Credits
 
