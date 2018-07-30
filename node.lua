@@ -15,6 +15,7 @@ function node.render()
     
     if screen == "title" then
         -- rectangle
+        resource.render_child("title_background"):draw(0, 0, 1024, 350, 1 + atrans)
         resource.render_child("talks_title"):draw(0, 350 + ytrans, 1024, 600 + (ytrans*1.2), 0 - atrans)
         resource.render_child("title_screen"):draw(0, 350 + ytrans, 1024, 600 + (ytrans*1.2), 1 + atrans)
         
