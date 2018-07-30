@@ -18,10 +18,10 @@ function node.render()
     gl.clear(0, 164/255, 183/255, 0.7)
     
     computerfont:write(50, 50, "Freitagsfoo", 100, 246/255, 36/255, 118/255, 1)
-    usericon:draw(600, 50, 645, 95)
-    cpmono:write(650, 50, current_data["host"], 50, 1, 1, 1, 1)
-    plannericon:draw(600, 125, 645, 170)
-    cpmono:write(650, 125, current_data["date"], 50, 1, 1, 1, 1, 1)
+    usericon:draw(598, 48, 648, 98)
+    cpmono:write(655, 50, current_data["host"], 50, 1, 1, 1, 1)
+    plannericon:draw(598, 123, 648, 173)
+    cpmono:write(655, 125, current_data["date"], 50, 1, 1, 1, 1, 1)
 end
 
 util.file_watch("freitagsfoo.json", function(content)
