@@ -18,8 +18,12 @@ function node.render()
     gl.clear(246/255, 36/255, 118/255, 1)
     
     if screen == "title" and not transition then
-        resource.render_child("title_background"):draw(0, 0, 1024, 350, 1)
+        resource.render_child("title_background"):draw(0, 0, 1024, 350, 1 + atrans)
         resource.render_child("title_screen"):draw(0, 350, 1024, 600, 1)
+        
+        if atrans < 0 then
+            atrans = atrans + 0.025
+        end
         
         if sys.now() > start_time + TRANSITION_TIMEOUT then
             transition = true
@@ -52,7 +56,8 @@ function node.render()
             transition = true
         end
     elseif screen == "talks" and transition then
-        resource.render_child("talks_title"):draw(0, 0 - ytrans, 1024, 180 - ytrans)
+        resource.render_child("talks_title"):draw(0, 0 - ytrans, 1024, 180 - (ytrans*1.2), 1 + atrans)
+        resource.render_child("title_screen"):draw(0, 0 - ytrans, 1024, 180 - (ytrans*1.2), 0 - atrans)
         resource.render_child("talks_screen"):draw(0, 180, 1024, 600, 1 + atrans)
         
         transition_step = transition_step + TRANSITION_SPEED
@@ -62,7 +67,6 @@ function node.render()
             transition = false
             transition_step = 0
             ytrans = 0
-            atrans = 0
             screen = "title"
             start_time = sys.now()
         end
