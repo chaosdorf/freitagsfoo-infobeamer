@@ -1,5 +1,8 @@
 gl.setup(1024, 600)
 
+local TRANSITION_TIMEOUT = 10
+local TRANSITION_SPEED = 3
+
 local ytrans = 0
 local atrans = 0
 local transition = false
@@ -18,7 +21,7 @@ function node.render()
         resource.render_child("title_background"):draw(0, 0, 1024, 350, 1)
         resource.render_child("title_screen"):draw(0, 350, 1024, 600, 1)
         
-        if sys.now() > start_time + 10 then
+        if sys.now() > start_time + TRANSITION_TIMEOUT then
             transition = true
         end
     elseif screen == "title" and transition then
@@ -26,7 +29,7 @@ function node.render()
         resource.render_child("talks_title"):draw(0, 350 + ytrans, 1024, 600 + (ytrans*1.2), 0 - atrans)
         resource.render_child("title_screen"):draw(0, 350 + ytrans, 1024, 600 + (ytrans*1.2), 1 + atrans)
         
-        transition_step = transition_step + 3
+        transition_step = transition_step + TRANSITION_SPEED
         ytrans = - 3.5 * transition_step
         atrans = - 0.01 * transition_step
         
@@ -45,14 +48,14 @@ function node.render()
             atrans = atrans + 0.025
         end
         
-        if sys.now() > start_time + 10 then
+        if sys.now() > start_time + TRANSITION_TIMEOUT then
             transition = true
         end
     elseif screen == "talks" and transition then
         resource.render_child("talks_title"):draw(0, 0 - ytrans, 1024, 180 - ytrans)
         resource.render_child("talks_screen"):draw(0, 180, 1024, 600, 1 + atrans)
         
-        transition_step = transition_step + 3
+        transition_step = transition_step + TRANSITION_SPEED
         ytrans = - 3.5 * transition_step
         atrans = - 0.01 * transition_step
         if transition_step >= 100 then
