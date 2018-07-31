@@ -3,6 +3,7 @@ gl.setup(1024, 600)
 local ytrans = 0
 local atrans = 0
 local transition = false
+local transition_step = 0 -- to 102
 local screen = "title"
 local start_time = sys.now()
 
@@ -25,11 +26,14 @@ function node.render()
         resource.render_child("talks_title"):draw(0, 350 + ytrans, 1024, 600 + (ytrans*1.2), 0 - atrans)
         resource.render_child("title_screen"):draw(0, 350 + ytrans, 1024, 600 + (ytrans*1.2), 1 + atrans)
         
-        ytrans = ytrans - 8
-        atrans = atrans - 0.025
+        transition_step = transition_step + 3
+        ytrans = - 3.5 * transition_step
+        atrans = - 0.01 * transition_step
+        
         if ytrans <= -350 then
             transition = false
             ytrans = 0
+            transition_step = 0
             screen = "talks"
             start_time = sys.now()
         end
@@ -48,10 +52,12 @@ function node.render()
         resource.render_child("talks_title"):draw(0, 0 - ytrans, 1024, 180 - ytrans)
         resource.render_child("talks_screen"):draw(0, 180, 1024, 600, 1 + atrans)
         
-        ytrans = ytrans - 8
-        atrans = atrans - 0.025
+        transition_step = transition_step + 3
+        ytrans = - 3.5 * transition_step
+        atrans = - 0.01 * transition_step
         if ytrans <= -350 then
             transition = false
+            transition_step = 0
             ytrans = 0
             atrans = 0
             screen = "title"
