@@ -30,7 +30,7 @@ function node.render()
         ytrans = - 3.5 * transition_step
         atrans = - 0.01 * transition_step
         
-        if ytrans <= -350 then
+        if transition_step >= 100 then
             transition = false
             ytrans = 0
             transition_step = 0
@@ -55,7 +55,7 @@ function node.render()
         transition_step = transition_step + 3
         ytrans = - 3.5 * transition_step
         atrans = - 0.01 * transition_step
-        if ytrans <= -350 then
+        if transition_step >= 100 then
             transition = false
             transition_step = 0
             ytrans = 0
