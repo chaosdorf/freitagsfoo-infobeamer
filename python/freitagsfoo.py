@@ -20,7 +20,7 @@ sections = wtp.parse(page.text()).sections
 top_section = page.text(section=0)
 parsed_top_section = wtp.parse(top_section)
 parsed_event = parsed_top_section.templates[0]
-result["host"] = parsed_event.get_arg("Host").value.strip()
+result["host"] = parsed_event.get_arg("Host").value.strip().lower()
 result["date"] = parsed_event.get_arg("Date").value.strip()
 assert result["date"] == str(friday_date)
 
