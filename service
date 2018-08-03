@@ -7,16 +7,19 @@ from requests import Session
 import shutil
 import os
 
-session = Session()
-while True:
-    r = session.get(URL)
+def save_text(content):
     curr_time = time()
     filename = "freitagsfoo-%s.json" % str(curr_time)
     f = open(filename, "w")
-    f.write(r.text)
+    f.write(content)
     f.close()
     shutil.copy(filename, "freitagsfoo.json")
     shutil.copy(filename, "talks_screen/freitagsfoo.json")
     shutil.copy(filename, "title_screen/freitagsfoo.json")
     os.remove(filename)
+
+session = Session()
+while True:
+    r = session.get(URL)
+    save_text(r.text)
     sleep(60)
