@@ -1,11 +1,22 @@
 #!/usr/bin/python2.7
 
-URL = "https://www.chaosdorf.de/~ytvwld/freitagsfoo.json"
-
 from time import sleep, time
+from datetime import date
 from requests import Session
+import json
 import shutil
 import os
+
+URL = "https://www.chaosdorf.de/~ytvwld/freitagsfoo.json"
+LOADING_DATA = {
+    "host": "...",
+    "date": str(date.today()),
+    "talks": [{
+        "title": "...",
+        "description": "...",
+        "persons": [],
+    }]
+}
 
 def save_text(content):
     curr_time = time()
@@ -17,6 +28,8 @@ def save_text(content):
     shutil.copy(filename, "talks_screen/freitagsfoo.json")
     shutil.copy(filename, "title_screen/freitagsfoo.json")
     os.remove(filename)
+
+save_text(json.dumps(LOADING_DATA))
 
 session = Session()
 while True:
