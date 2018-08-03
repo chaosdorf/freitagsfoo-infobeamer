@@ -1,7 +1,11 @@
 gl.setup(1024, 250)
 
 local json = require "json"
-local current_data
+-- This gets overwritten when the correct data has been fetched.
+local current_data = {
+    ["host"] = "...",
+    ["date"] = "..."
+}
 
 -- title
 local computerfont = resource.load_font("Computerfont.ttf")

@@ -1,7 +1,16 @@
 gl.setup(1024, 420)
 
 local json = require "json"
-local current_data
+-- This gets overwritten when the correct data has been fetched.
+local current_data = {
+    ["date"] = "...",
+    ["talks"] = {
+        [0] = {
+            ["title"] = "...",
+            ["persons"] = {},
+        },
+    },
+}
 
 -- normal text
 local cpmono = resource.load_font("CPMono_v07_Plain.otf")
