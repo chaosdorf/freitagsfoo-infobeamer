@@ -5,9 +5,10 @@ local TRANSITION_SPEED = 3
 
 local ytrans = 0
 local atrans = 0
+local bgtrans = - 1
 local transition = false
 local transition_step = 0 -- to 102
-local screen = "title"
+local screen = "initial"
 local start_time = sys.now()
 
 -- colored rectangle
@@ -15,9 +16,34 @@ local bluerect = resource.create_colored_texture(0, 164/255, 183/255, 0.7)
 
 function node.render()
     -- background
-    gl.clear(246/255, 36/255, 118/255, 1)
+    gl.clear(246/255, 36/255, 118/255, 1 + bgtrans)
     
-    if screen == "title" and not transition then
+    if screen == "initial" and not transition then
+        
+        if bgtrans < 0 then
+            bgtrans = bgtrans + 0.025
+        end
+        
+        if sys.now() > start_time + 1 then
+            transition = true
+            transition_step = 0
+            start_time = sys.now()
+        end
+    elseif screen == "initial" and transition then
+        resource.render_child("title_screen"):draw(0, 600 - ytrans, 1024, 850 - ytrans, 1)
+        
+        transition_step = transition_step + TRANSITION_SPEED
+        ytrans = 2.5 * transition_step
+        
+        if transition_step >= 100 then
+            transition = false
+            ytrans = 0
+            atrans = - 1
+            transition_step = 0
+            screen = "title"
+            start_time = sys.now()
+        end
+    elseif screen == "title" and not transition then
         resource.render_child("title_background"):draw(0, 0, 1024, 350, 1 + atrans)
         resource.render_child("title_screen"):draw(0, 350, 1024, 600, 1)
         
