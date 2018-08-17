@@ -12,7 +12,7 @@ function node.render()
   
   -- program in the upper left corner
   computerfont:write(43, 25, "10 FOO", 60, 0, 164/255, 183/255, 0.7)
-  computerfont:write(25, 85, "20 GOTO FOO", 60, 0, 164/255, 183/255, 0.7)
+  computerfont:write(25, 85, "20 GOTO 10", 60, 0, 164/255, 183/255, 0.7)
   
   -- pesthoernchen
   util.draw_correct(pesthoernchen, 700, 100, 950, 325)
