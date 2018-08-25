@@ -18,6 +18,7 @@ LOADING_DATA = {
     }]
 }
 
+
 def save_text(content):
     curr_time = time()
     filename = "freitagsfoo-%s.json" % str(curr_time)
@@ -28,6 +29,7 @@ def save_text(content):
     shutil.copy(filename, "talks_screen/freitagsfoo.json")
     shutil.copy(filename, "title_screen/freitagsfoo.json")
     os.remove(filename)
+
 
 save_text(json.dumps(LOADING_DATA))
 
