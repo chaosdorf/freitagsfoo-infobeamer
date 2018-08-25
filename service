@@ -9,7 +9,7 @@ import os
 
 URL = "https://www.chaosdorf.de/~ytvwld/freitagsfoo.json"
 LOADING_DATA = {
-    "host": "...",
+    "hosts": ["..."],
     "date": str(date.today()),
     "talks": [{
         "title": "...",

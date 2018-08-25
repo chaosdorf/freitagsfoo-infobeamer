@@ -1,5 +1,5 @@
 {
-    "host": "FIXME",
+    "hosts": ["FIXME"],
     "date": "1970-01-01",
     "talks": [
         {
