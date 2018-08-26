@@ -56,8 +56,10 @@ function node.render()
                 start_time = sys.now()
             end
         end
+    else
+        host_index = 1
     end
-    cpmono:write(655, 50, current_data["hosts"][host_index], 50, 1, 1, 1, host_alpha)
+    cpmono:write(655, 50, current_data["hosts"][host_index] or "...", 50, 1, 1, 1, host_alpha)
     plannericon:draw(598, 123, 648, 173)
     cpmono:write(655, 125, current_data["date"], 50, 1, 1, 1, 1, 1)
 end
