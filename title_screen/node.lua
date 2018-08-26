@@ -31,28 +31,30 @@ function node.render()
     
     computerfont:write(50, 50, "Freitagsfoo", 100, 246/255, 36/255, 118/255, 1)
     usericon:draw(598, 48, 648, 98)
-    if(animation_state == 0) then -- animation hasn't started or has finished
-        host_alpha = 1 -- just to be sure
-        if(start_time + TIME_PER_HOST < sys.now()) then
-            animation_state = 1
-            start_time = sys.now()
-        end
-    elseif(animation_state == 1) then -- fade out
-        host_alpha = host_alpha - 0.04
-        if(start_time + 0.5 < sys.now()) then
-            host_alpha = 0 -- just to be sure
-            host_index = host_index + 1
-            if(host_index > #current_data["hosts"]) then
-                host_index = 1
+    if(#current_data["hosts"] > 1) then
+        if(animation_state == 0) then -- animation hasn't started or has finished
+            host_alpha = 1 -- just to be sure
+            if(start_time + TIME_PER_HOST < sys.now()) then
+                animation_state = 1
+                start_time = sys.now()
             end
-            start_time = sys.now()
-            animation_state = 2
-        end
-    elseif(animation_state == 2) then -- fade in
-        host_alpha = host_alpha + 0.04
-        if(start_time + 0.5 < sys.now()) then
-            animation_state = 0
-            start_time = sys.now()
+        elseif(animation_state == 1) then -- fade out
+            host_alpha = host_alpha - 0.04
+            if(start_time + 0.5 < sys.now()) then
+                host_alpha = 0 -- just to be sure
+                host_index = host_index + 1
+                if(host_index > #current_data["hosts"]) then
+                    host_index = 1
+                end
+                start_time = sys.now()
+                animation_state = 2
+            end
+        elseif(animation_state == 2) then -- fade in
+            host_alpha = host_alpha + 0.04
+            if(start_time + 0.5 < sys.now()) then
+                animation_state = 0
+                start_time = sys.now()
+            end
         end
     end
     cpmono:write(655, 50, current_data["hosts"][host_index], 50, 1, 1, 1, host_alpha)
