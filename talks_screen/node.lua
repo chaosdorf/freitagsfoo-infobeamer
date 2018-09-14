@@ -5,7 +5,7 @@ local json = require "json"
 local current_data = {
     ["date"] = "...",
     ["talks"] = {
-        [0] = {
+        [1] = {
             ["title"] = "...",
             ["persons"] = {},
         },
