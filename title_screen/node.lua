@@ -5,7 +5,9 @@ local TIME_PER_HOST = 3
 local json = require "json"
 -- This gets overwritten when the correct data has been fetched.
 local current_data = {
-    ["host"] = "...",
+    ["hosts"] = {
+        [1] = "...",
+    },
     ["date"] = "..."
 }
 
