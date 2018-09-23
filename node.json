@@ -4,11 +4,20 @@
         "network": "needs to fetch talk data"
     },
     "optional": [
+        "README.md",
         "screenshot.png",
         "screenshot2.png",
+        "talks_screen/README.md",
+        "talks_screen/screenshot.png",
+        "talks_title/README.md",
+        "talks_title/screenshot.png",
+        "title_background/README.md",
+        "title_background/screenshot.png",
+        "title_screen/README.md",
+        "title_screen/screenshot.png",
+        "python/README.md",
         "python/freitagsfoo.py",
         "python/requirements.txt",
-        "package.png",
-        "README.md"
+        "package.png"
     ]
 }

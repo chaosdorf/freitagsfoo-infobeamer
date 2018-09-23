@@ -10,6 +10,10 @@ This software is meant to be used on info-beamer during a [Freitagsfoo](https://
 > 
 > *talks screen*
 
+## main node
+
+This folder contains the main node which does the animations and switches between the different screens.
+
 ## Credits
 
 Used fonts:
