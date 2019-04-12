@@ -48,6 +48,21 @@ function node.render()
             next_screen = "talks"
             start_time = sys.now()
         end
+    elseif screen == "initial" and next_screen == "talks" and transition then
+        resource.render_child("talks_title"):draw(0, -180 + ytrans, 1024, 0 + ytrans, 1)
+        
+        transition_step = transition_step + TRANSITION_SPEED
+        ytrans = 1.75 * transition_step
+        
+        if transition_step >= 100 then
+            transition = false
+            ytrans = 0
+            atrans = - 1
+            transition_step = 0
+            screen = "talks"
+            next_screen = "title"
+            start_time = sys.now()
+        end
     elseif screen == "title" and not transition then
         resource.render_child("title_background"):draw(0, 0, 1024, 350, 1 + atrans)
         resource.render_child("title_screen"):draw(0, 350, 1024, 600, 1)
@@ -76,6 +91,22 @@ function node.render()
             next_screen = "title"
             start_time = sys.now()
         end
+    elseif screen == "title" and next_screen == "initial" and transition then
+        resource.render_child("title_background"):draw(0, 0, 1024, 350, 1 + atrans)
+        resource.render_child("title_screen"):draw(0, 350 + ytrans, 1024, 600 + ytrans)
+        
+        transition_step = transition_step + TRANSITION_SPEED
+        ytrans = 3.5 * transition_step
+        atrans = - 0.01 * transition_step
+        
+        if transition_step >= 100 then
+            transition = false
+            ytrans = 0
+            transition_step = 0
+            screen = "initial"
+            next_screen = "title"
+            start_time = sys.now()
+        end
     elseif screen == "talks" and not transition then
         resource.render_child("talks_title"):draw(0, 0, 1024, 180, 1)
         resource.render_child("talks_screen"):draw(0, 180, 1024, 600, 1 + atrans)
@@ -101,6 +132,21 @@ function node.render()
             ytrans = 0
             screen = "title"
             next_screen = "talks"
+            start_time = sys.now()
+        end
+    elseif screen == "talks" and next_screen == "initial" and transition then
+        resource.render_child("talks_title"):draw(0, 0 + ytrans, 1024, 180 + ytrans)
+        resource.render_child("talks_screen"):draw(0, 180, 1024, 600, 1 + atrans)
+        
+        transition_step = transition_step + TRANSITION_SPEED
+        ytrans = - 2.25 * transition_step
+        atrans = - 0.01 * transition_step
+        if transition_step >= 100 then
+            transition = false
+            transition_step = 0
+            ytrans = 0
+            screen = "initial"
+            next_screen = "title"
             start_time = sys.now()
         end
     end
