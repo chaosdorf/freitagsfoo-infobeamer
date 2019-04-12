@@ -172,7 +172,10 @@ node.event("data", function(data, suffix)
     if suffix == "screen" then
         if not transition then
             -- changing the next screen during a transition breaks stuff
-            next_screen = data
+            if data ~= screen then
+                -- next_screen == screen breaks stuff
+                next_screen = data
+            end
         end
     end
 end)
