@@ -9,6 +9,7 @@ local bgtrans = - 1
 local transition = false
 local transition_step = 0 -- to 102
 local screen = "initial"
+local next_screen = "title"
 local start_time = sys.now()
 
 -- colored rectangle
@@ -32,7 +33,7 @@ function node.render()
             transition_step = 0
             start_time = sys.now()
         end
-    elseif screen == "initial" and transition then
+    elseif screen == "initial" and next_screen == "title" and transition then
         resource.render_child("title_screen"):draw(0, 600 - ytrans, 1024, 850 - ytrans, 1)
         
         transition_step = transition_step + TRANSITION_SPEED
@@ -44,6 +45,7 @@ function node.render()
             atrans = - 1
             transition_step = 0
             screen = "title"
+            next_screen = "talks"
             start_time = sys.now()
         end
     elseif screen == "title" and not transition then
@@ -57,7 +59,7 @@ function node.render()
         if sys.now() > start_time + TRANSITION_TIMEOUT then
             transition = true
         end
-    elseif screen == "title" and transition then
+    elseif screen == "title" and next_screen == "talks" and transition then
         resource.render_child("title_background"):draw(0, 0, 1024, 350, 1 + atrans)
         resource.render_child("talks_title"):draw(0, 350 + ytrans, 1024, 600 + (ytrans*1.2), 0 - atrans)
         resource.render_child("title_screen"):draw(0, 350 + ytrans, 1024, 600 + (ytrans*1.2), 1 + atrans)
@@ -71,6 +73,7 @@ function node.render()
             ytrans = 0
             transition_step = 0
             screen = "talks"
+            next_screen = "title"
             start_time = sys.now()
         end
     elseif screen == "talks" and not transition then
@@ -84,7 +87,7 @@ function node.render()
         if sys.now() > start_time + TRANSITION_TIMEOUT then
             transition = true
         end
-    elseif screen == "talks" and transition then
+    elseif screen == "talks" and next_screen == "title" and transition then
         resource.render_child("talks_title"):draw(0, 0 - ytrans, 1024, 180 - (ytrans*1.2), 1 + atrans)
         resource.render_child("title_screen"):draw(0, 0 - ytrans, 1024, 180 - (ytrans*1.2), 0 - atrans)
         resource.render_child("talks_screen"):draw(0, 180, 1024, 600, 1 + atrans)
@@ -97,6 +100,7 @@ function node.render()
             transition_step = 0
             ytrans = 0
             screen = "title"
+            next_screen = "talks"
             start_time = sys.now()
         end
     end
