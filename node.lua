@@ -14,9 +14,12 @@ local start_time = sys.now()
 -- colored rectangle
 local bluerect = resource.create_colored_texture(0, 164/255, 183/255, 0.7)
 
+-- colored background
+local redbg = resource.create_colored_texture(246/255, 36/255, 118/255)
+
 function node.render()
-    -- background
-    gl.clear(246/255, 36/255, 118/255, 1 + bgtrans)
+    resource.render_child("background"):draw(0, 0, 1024, 600, 1)
+    redbg:draw(0, 0, 1024, 600, 1 + bgtrans)
     
     if screen == "initial" and not transition then
         

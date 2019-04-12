@@ -14,6 +14,10 @@ This software is meant to be used on info-beamer during a [Freitagsfoo](https://
 
 This folder contains the main node which does the animations and switches between the different screens.
 
+## background
+
+You need to configura a background by adding a child package called `background`. A simple background which just paints a black screen is included.
+
 ## Credits
 
 Used fonts:
