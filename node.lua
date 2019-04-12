@@ -13,10 +13,10 @@ local next_screen = "title"
 local start_time = sys.now()
 
 -- colored rectangle
-local bluerect = resource.create_colored_texture(0, 164/255, 183/255, 0.7)
+local bluerect = resource.create_colored_texture(17/255, 224/255, 123/255, 1)
 
 -- colored background
-local redbg = resource.create_colored_texture(246/255, 36/255, 118/255)
+local redbg = resource.create_colored_texture(109/255, 4/255, 211/255)
 
 function node.render()
     resource.render_child("background"):draw(0, 0, 1024, 600, 1)
