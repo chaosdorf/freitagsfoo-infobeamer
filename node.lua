@@ -151,3 +151,13 @@ function node.render()
         end
     end
 end
+
+node.alias("freitagsfoo")
+node.event("data", function(data, suffix)
+    if suffix == "screen" then
+        if not transition then
+            -- changing the next screen during a transition breaks stuff
+            next_screen = data
+        end
+    end
+end)
