@@ -63,6 +63,21 @@ function node.render()
             next_screen = "title"
             start_time = sys.now()
         end
+    elseif screen == "initial" and next_screen == "background" and transition then
+        bgtrans = bgtrans - 0.025
+        
+        if bgtrans <= - 1 then
+            transition = false
+            transition_step = 0
+            screen = "background"
+            next_screen = "background"
+            start_time = sys.now()
+        end
+    elseif screen == "background" and not transition then
+        if next_screen ~= "background" then
+            screen = "initial"
+            start_time = sys.now()
+        end
     elseif screen == "title" and not transition then
         resource.render_child("title_background"):draw(0, 0, 1024, 350, 1 + atrans)
         resource.render_child("title_screen"):draw(0, 350, 1024, 600, 1)
@@ -104,7 +119,7 @@ function node.render()
             ytrans = 0
             transition_step = 0
             screen = "initial"
-            next_screen = "title"
+            next_screen = "background"
             start_time = sys.now()
         end
     elseif screen == "talks" and not transition then
@@ -146,7 +161,7 @@ function node.render()
             transition_step = 0
             ytrans = 0
             screen = "initial"
-            next_screen = "title"
+            next_screen = "background"
             start_time = sys.now()
         end
     end
