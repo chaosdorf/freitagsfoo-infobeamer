@@ -134,9 +134,9 @@ function node.render()
             transition = true
         end
     elseif screen == "talks" and next_screen == "title" and transition then
+        resource.render_child("talks_screen"):draw(0, 180, 1024, 600, 1 + atrans)
         resource.render_child("talks_title"):draw(0, 0 - ytrans, 1024, 180 - (ytrans*1.2), 1 + atrans)
         resource.render_child("title_screen"):draw(0, 0 - ytrans, 1024, 180 - (ytrans*1.2), 0 - atrans)
-        resource.render_child("talks_screen"):draw(0, 180, 1024, 600, 1 + atrans)
         
         transition_step = transition_step + TRANSITION_SPEED
         ytrans = - 3.5 * transition_step
