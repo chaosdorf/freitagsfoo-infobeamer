@@ -13,6 +13,7 @@ local transition = false
 local transition_step = 0 -- to 102
 local screen = "initial"
 local next_screen = "title"
+local scheduled_screen = nil
 local start_time = sys.now()
 
 -- colored rectangle
@@ -48,7 +49,12 @@ function node.render()
             atrans = - 1
             transition_step = 0
             screen = "title"
-            next_screen = "talks"
+            if scheduled_screen == nil then
+                next_screen = "talks"
+            else
+                next_screen = scheduled_screen
+                scheduled_screen = nil
+            end
             start_time = sys.now()
         end
     elseif screen == "initial" and next_screen == "talks" and transition then
@@ -63,7 +69,12 @@ function node.render()
             atrans = - 1
             transition_step = 0
             screen = "talks"
-            next_screen = "title"
+            if scheduled_screen == nil then
+                next_screen = "title"
+            else
+                next_screen = scheduled_screen
+                scheduled_screen = nil
+            end
             start_time = sys.now()
         end
     elseif screen == "initial" and next_screen == "background" and transition then
@@ -73,7 +84,12 @@ function node.render()
             transition = false
             transition_step = 0
             screen = "background"
-            next_screen = "background"
+            if scheduled_screen == nil then
+                next_screen = "background"
+            else
+                next_screen = scheduled_screen
+                scheduled_screen = nil
+            end
             start_time = sys.now()
         end
     elseif screen == "background" and not transition then
@@ -106,7 +122,12 @@ function node.render()
             ytrans = 0
             transition_step = 0
             screen = "talks"
-            next_screen = "title"
+            if scheduled_screen == nil then
+                next_screen = "title"
+            else
+                next_screen = scheduled_screen
+                scheduled_screen = nil
+            end
             start_time = sys.now()
         end
     elseif screen == "title" and next_screen == "initial" and transition then
@@ -149,7 +170,12 @@ function node.render()
             transition_step = 0
             ytrans = 0
             screen = "title"
-            next_screen = "talks"
+            if scheduled_screen == nil then
+                next_screen = "talks"
+            else
+                next_screen = scheduled_screen
+                scheduled_screen = nil
+            end
             start_time = sys.now()
         end
     elseif screen == "talks" and next_screen == "initial" and transition then
@@ -184,9 +210,14 @@ node.event("data", function(data, suffix)
             if data ~= screen then
                 -- next_screen == screen breaks stuff
                 if not (screen == "background" and data == "initial") then
-                  next_screen = data
+                    next_screen = data
+                    scheduled_screen = nil
                 end
             end
+        else
+            -- schedule the change for after the current transition,
+            -- so that it doesn't get lost
+            scheduled_screen = data
         end
     end
 end)
