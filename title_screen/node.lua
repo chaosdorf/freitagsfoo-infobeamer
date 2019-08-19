@@ -29,9 +29,9 @@ local plannericon = resource.load_image("planner.png")
 
 function node.render()
     -- background
-    gl.clear(17/255, 224/255, 123/255, 1)
+    gl.clear(1, 1, 1, 1)
     
-    computerfont:write(50, 50, "Freitagsfoo", 100, 109/255, 4/255, 211/255, 1)
+    computerfont:write(50, 50, "Freitagsfoo", 100, 0, 0, 0, 1)
     usericon:draw(598, 48, 648, 98)
     if(#current_data["hosts"] > 1) then
         if(animation_state == 0) then -- animation hasn't started or has finished
@@ -61,9 +61,9 @@ function node.render()
     else
         host_index = 1
     end
-    cpmono:write(655, 50, current_data["hosts"][host_index] or "...", 50, 1, 1, 1, host_alpha)
+    cpmono:write(655, 50, current_data["hosts"][host_index] or "...", 50, 0, 0, 0, host_alpha)
     plannericon:draw(598, 123, 648, 173)
-    cpmono:write(655, 125, current_data["date"], 50, 1, 1, 1, 1, 1)
+    cpmono:write(655, 125, current_data["date"], 50, 0, 0, 0, 1)
 end
 
 util.file_watch("freitagsfoo.json", function(content)

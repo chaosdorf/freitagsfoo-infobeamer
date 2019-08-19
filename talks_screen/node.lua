@@ -19,7 +19,7 @@ local cpmono = resource.load_font("CPMono_v07_Plain.otf")
 local usericon = resource.load_image("user.png")
 
 function node.render()
-    gl.clear(109/255, 4/255, 211/255, 1)
+    gl.clear(0, 0, 0, 1)
     
     local line_offset = 0
     

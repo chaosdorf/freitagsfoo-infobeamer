@@ -17,10 +17,10 @@ local scheduled_screen = nil
 local start_time = sys.now()
 
 -- colored rectangle
-local bluerect = resource.create_colored_texture(17/255, 224/255, 123/255, 1)
+local bluerect = resource.create_colored_texture(1, 1, 1, 1)
 
 -- colored background
-local redbg = resource.create_colored_texture(109/255, 4/255, 211/255)
+local redbg = resource.create_colored_texture(0, 0, 0)
 
 function node.render()
     resource.render_child("background"):draw(0, 0, 1024, 600, 1)
