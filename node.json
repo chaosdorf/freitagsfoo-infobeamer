@@ -1,5 +1,5 @@
 {
-    "name": "Freitagsfoo",
+    "name": "Lightning Talks",
     "permissions": {
         "network": "needs to fetch talk data"
     },

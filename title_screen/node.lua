@@ -31,7 +31,7 @@ function node.render()
     -- background
     gl.clear(1, 1, 1, 1)
     
-    computerfont:write(50, 50, "Freitagsfoo", 100, 0, 0, 0, 1)
+    computerfont:write(50, 50, "Lightning Talks", 100, 0, 0, 0, 1)
     usericon:draw(598, 48, 648, 98)
     if(#current_data["hosts"] > 1) then
         if(animation_state == 0) then -- animation hasn't started or has finished

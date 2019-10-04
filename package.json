@@ -1,6 +1,6 @@
 {
-    "name": "Freitagsfoo",
+    "name": "Lightning Talks",
     "author": "Chaosdorf",
-    "desc": "This software is meant to be used on info-beamer during a Freitagsfoo.",
+    "desc": "This software is meant to be used on info-beamer during lightning talks.",
     "repository": "https://github.com/chaosdorf/freitagsfoo-infobeamer"
 }

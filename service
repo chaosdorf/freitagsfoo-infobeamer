@@ -7,7 +7,7 @@ import json
 import shutil
 import os
 
-URL = "https://www.chaosdorf.de/~ytvwld/freitagsfoo.json"
+URL = "https://www.chaosdorf.de/~ytvwld/lightning-talks.json"
 LOADING_DATA = {
     "hosts": ["..."],
     "date": str(date.today()),

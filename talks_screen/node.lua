@@ -41,7 +41,7 @@ function node.render()
         cpmono:write(100, (num*3+1)*40, persons_string, 32, 1, 1, 1, 1, 1)
     end
     
-    cpmono:write(20, 375, "Add yours at https://wiki.chaosdorf.de/Freitagsfoo/" .. current_data["date"], 25, 1, 1, 1, 1, 1)
+    cpmono:write(20, 375, "Add yours at https://wiki.chaosdorf.de/18_Jahre_Chaosdorf_Lightningtalks", 25, 1, 1, 1, 1, 1)
 end
 
 util.file_watch("freitagsfoo.json", function(content)
