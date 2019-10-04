@@ -24,21 +24,15 @@ function node.render()
     local line_offset = 0
     
     for num, talk in pairs(current_data["talks"]) do
-        num = num - 0.75 -- index starts at 1
-        cpmono:write(40, (num*3)*40, talk["title"], 32, 1, 1, 1, 1, 1)
-        
-        local persons_string = ""
+        cpmono:write(40, (num+line_offset)*40, talk["title"], 32, 1, 1, 1, 1, 1)
         
         for num_, person in pairs(talk["persons"]) do
-            if(persons_string == "") then
-                persons_string = person
-            else
-                persons_string = persons_string .. ", " .. person
+            usericon:draw(700, (num+num_-1+line_offset)*39, 740, (num+num_-1+line_offset)*39+40)
+            cpmono:write(760, (num+num_-1+line_offset)*40, person, 32, 1, 1, 1, 1, 1)
+            if num_ > 1 then
+                line_offset = line_offset + 1
             end
         end
-        
-        usericon:draw(40, (num*3+1)*39, 80, (num*3+1)*39+40)
-        cpmono:write(100, (num*3+1)*40, persons_string, 32, 1, 1, 1, 1, 1)
     end
     
     cpmono:write(20, 375, "Add yours at https://wiki.chaosdorf.de/18_Jahre_Chaosdorf_Lightningtalks", 21, 1, 1, 1, 1, 1)
