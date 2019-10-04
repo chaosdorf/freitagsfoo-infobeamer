@@ -1,29 +1,7 @@
-# info-beamer software for Freitagsfoo
+# info-beamer software for lightning talks
 
-This software is meant to be used on info-beamer during a [Freitagsfoo](https://wiki.chaosdorf.de/Freitagsfoo).
-
-> ![screenshot](screenshot.png)
-> 
-> *title screen*
-
-> ![screenshot2](screenshot2.png)
-> 
-> *talks screen*
-
-## main node
-
-This folder contains the main node which does the animations and switches between the different screens.
-
-On start, the software just displays the background animation.
-You'll need to switch to a different screen to see anything meaningful:
-
-```
-echo -n "freitagsfoo/screen:title" | nc -u localhost 4444
-```
-
-## background
-
-You need to configura a background by adding a child package called `background`. A simple background which just paints a black screen is included.
+This is a variant of our Freitagsfoo info-beamer app which is adjusted to do
+lightning talks. Please refer to the master branch for screenshot and documentation.
 
 ## Credits
 
