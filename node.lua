@@ -11,8 +11,8 @@ local atrans = 0
 local bgtrans = - 1
 local transition = false
 local transition_step = 0 -- to 102
-local screen = "background"
-local next_screen = "background"
+local screen = "initial"
+local next_screen = "title"
 local scheduled_screen = nil
 local start_time = sys.now()
 
