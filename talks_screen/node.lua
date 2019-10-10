@@ -24,8 +24,8 @@ function node.render()
     local line_offset = 0
     
     for num, talk in pairs(current_data["talks"]) do
-        num = num - 0.75 -- index starts at 1
-        cpmono:write(40, (num*3)*40, talk["title"], 32, 1, 1, 1, 1, 1)
+        num = num - 0.9 -- index starts at 1
+        cpmono:write(40, (num*2.5)*40, talk["title"], 32, 1, 1, 1, 1, 1)
         
         local persons_string = ""
         
@@ -37,11 +37,11 @@ function node.render()
             end
         end
         
-        usericon:draw(40, (num*3+1)*39, 80, (num*3+1)*39+40)
-        cpmono:write(100, (num*3+1)*40, persons_string, 32, 1, 1, 1, 1, 1)
+        usericon:draw(40, (num*2.5+1)*39, 80, (num*2.5+1)*39+40)
+        cpmono:write(100, (num*2.5+1)*40, persons_string, 32, 1, 1, 1, 1, 1)
     end
     
-    cpmono:write(20, 375, "Add yours at https://wiki.chaosdorf.de/Freitagsfoo/" .. current_data["date"], 25, 1, 1, 1, 1, 1)
+    cpmono:write(20, 390, "Add yours at https://wiki.chaosdorf.de/Freitagsfoo/" .. current_data["date"], 25, 1, 1, 1, 1, 1)
 end
 
 util.file_watch("freitagsfoo.json", function(content)
