@@ -31,8 +31,6 @@ local TRANSITION_TIMEOUT = 5
 function node.render()
     gl.clear(0, 0, 0, 1)
     
-    local line_offset = 0
-    
     local num__ = 1 -- sadly, Lua doesn't let us use num after the loop
     for num, talk in pairs(current_data["talks"]) do
         num__ = num
