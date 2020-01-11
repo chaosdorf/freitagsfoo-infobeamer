@@ -13,6 +13,16 @@
             "persons": ["person B", "person C"]
         },
         {
+            "title": "some other talk 2",
+            "description": "blah",
+            "persons": ["person B", "person C"]
+        },
+        {
+            "title": "some other talk 3",
+            "description": "blah",
+            "persons": ["person B", "person C"]
+        },
+        {
             "title": "even more talks!",
             "description": "foo bar",
             "persons": ["abc"]
