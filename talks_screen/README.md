@@ -5,6 +5,5 @@
 This is the part of the screen which displays the talks.
 
 If there are more than four talks pagination kicks in.
-(It is not yet animated.)
 
 An animation in the main node interleaves this with the title background.

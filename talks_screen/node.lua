@@ -28,6 +28,12 @@ local start_time = sys.now()
 -- TODO: calculate this based on the number of pages?
 local TRANSITION_TIMEOUT = 5
 
+-- how fast to fade
+local OPACITY_STEP = 0.05
+
+-- are we currently fading?
+local opacity = 1
+
 function node.render()
     gl.clear(0, 0, 0, 1)
     
@@ -38,7 +44,7 @@ function node.render()
         if num > (current_page - 1) * 4 and num <= current_page * 4 then
             local row = (num - 1) % 4 + 1 -- modulo, but indices start at 1
             row = row - 0.9 -- index starts at 1
-            cpmono:write(40, (row*2.5)*40, talk["title"], 32, 1, 1, 1, 1, 1)
+            cpmono:write(40, (row*2.5)*40, talk["title"], 32, 1, 1, 1, opacity)
             
             local persons_string = ""
             
@@ -50,8 +56,8 @@ function node.render()
                 end
             end
             
-            usericon:draw(40, (row*2.5+1)*39, 80, (row*2.5+1)*39+40)
-            cpmono:write(100, (row*2.5+1)*40, persons_string, 32, 1, 1, 1, 1, 1)
+            usericon:draw(40, (row*2.5+1)*39, 80, (row*2.5+1)*39+40, opacity)
+            cpmono:write(100, (row*2.5+1)*40, persons_string, 32, 1, 1, 1, opacity)
         end
     end
     
@@ -59,20 +65,30 @@ function node.render()
     if num__ > 4 then
         local count_pages = math.ceil(num__ / 4)
         local text = current_page .. "/" .. count_pages
-        cpmono:write(950, 5, text, 23, 1, 1, 1)
-        -- switch to the next page after some time
+        cpmono:write(950, 5, text, 23, 1, 1, 1, opacity)
+        -- fade out after some time
         if sys.now() > start_time + TRANSITION_TIMEOUT then
-            current_page = current_page + 1
-            -- wrap around
-            if current_page > count_pages then
-                current_page = 1
+            opacity = opacity - OPACITY_STEP
+            -- when we are not seen anymore, switch to the next page
+            if opacity <= 0 then
+                current_page = current_page + 1
+                -- wrap around
+                if current_page > count_pages then
+                    current_page = 1
+                end
+                start_time = sys.now()
             end
-            start_time = sys.now()
+        else
+            -- fade back in
+            if opacity < 1 then
+                opacity = opacity + OPACITY_STEP
+            end
         end
     else
         -- we might fall down to just one page
         current_page = 1
         start_time = sys.now()
+        opacity = 1
     end
     
     cpmono:write(20, 390, "Add yours at https://wiki.chaosdorf.de/Freitagsfoo/" .. current_data["date"], 25, 1, 1, 1, 1, 1)
