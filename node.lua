@@ -332,6 +332,12 @@ node.event("data", function(data, suffix)
                 if not (screen == "background" and data == "initial") then
                     next_screen = data
                     scheduled_screen = nil
+                    -- trigger the transition if we can
+                    if screen ~= "background" then
+                        transition = true
+                        transition_step = 0
+                        start_time = sys.now()
+                    end
                 end
             end
         else
