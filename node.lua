@@ -52,11 +52,12 @@ function node.render()
             screen = "title"
             if scheduled_screen == nil then
                 next_screen = "talks"
+                start_time = sys.now()
             else
                 next_screen = scheduled_screen
                 scheduled_screen = nil
+                start_time = sys.now() - TRANSITION_TIMEOUT/1.5
             end
-            start_time = sys.now()
         end
     elseif screen == "initial" and next_screen == "talks" and transition then
         resource.render_child("talks_title"):draw(0, -180 + ytrans, 1024, 0 + ytrans, 1)
@@ -72,11 +73,12 @@ function node.render()
             screen = "talks"
             if scheduled_screen == nil then
                 next_screen = "title"
+                start_time = sys.now()
             else
                 next_screen = scheduled_screen
                 scheduled_screen = nil
+                start_time = sys.now() - TRANSITION_TIMEOUT/1.5
             end
-            start_time = sys.now()
         end
     elseif screen == "initial" and next_screen == "next" and transition then
         resource.render_child("next_title"):draw(0, -180 + ytrans, 1024, 0 + ytrans, 1)
@@ -92,11 +94,12 @@ function node.render()
             screen = "next"
             if scheduled_screen == nil then
                 next_screen = "title"
+                start_time = sys.now()
             else
                 next_screen = scheduled_screen
                 scheduled_screen = nil
+                start_time = sys.now() - TRANSITION_TIMEOUT/1.5
             end
-            start_time = sys.now()
         end
     elseif screen == "initial" and next_screen == "background" and transition then
         bgtrans = bgtrans - 0.025
@@ -107,11 +110,12 @@ function node.render()
             screen = "background"
             if scheduled_screen == nil then
                 next_screen = "background"
+                start_time = sys.now()
             else
                 next_screen = scheduled_screen
                 scheduled_screen = nil
+                start_time = sys.now() - TRANSITION_TIMEOUT/1.5
             end
-            start_time = sys.now()
         end
     elseif screen == "background" and not transition then
         if next_screen ~= "background" then
@@ -145,11 +149,12 @@ function node.render()
             screen = "talks"
             if scheduled_screen == nil then
                 next_screen = "title"
+                start_time = sys.now()
             else
                 next_screen = scheduled_screen
                 scheduled_screen = nil
+                start_time = sys.now() - TRANSITION_TIMEOUT/1.5
             end
-            start_time = sys.now()
         end
     elseif screen == "title" and next_screen == "next" and transition then
         resource.render_child("title_background"):draw(0, 0, 1024, 350, 1 + atrans)
@@ -167,11 +172,12 @@ function node.render()
             screen = "next"
             if scheduled_screen == nil then
                 next_screen = "title"
+                start_time = sys.now()
             else
                 next_screen = scheduled_screen
                 scheduled_screen = nil
+                start_time = sys.now() - TRANSITION_TIMEOUT/1.5
             end
-            start_time = sys.now()
         end
     elseif screen == "title" and next_screen == "initial" and transition then
         resource.render_child("title_background"):draw(0, 0, 1024, 350, 1 + atrans)
@@ -215,11 +221,12 @@ function node.render()
             screen = "title"
             if scheduled_screen == nil then
                 next_screen = "talks"
+                start_time = sys.now()
             else
                 next_screen = scheduled_screen
                 scheduled_screen = nil
+                start_time = sys.now() - TRANSITION_TIMEOUT/1.5
             end
-            start_time = sys.now()
         end
     elseif screen == "talks" and next_screen == "initial" and transition then
         resource.render_child("talks_title"):draw(0, 0 + ytrans, 1024, 180 + ytrans)
@@ -277,11 +284,12 @@ function node.render()
             screen = "title"
             if scheduled_screen == nil then
                 next_screen = "next"
+                start_time = sys.now()
             else
                 next_screen = scheduled_screen
                 scheduled_screen = nil
+                start_time = sys.now() - TRANSITION_TIMEOUT/1.5
             end
-            start_time = sys.now()
         end
     elseif screen == "next" and next_screen == "talks" and transition then
         resource.render_child("next_title"):draw(0 + xtrans, 0, 1024 + xtrans, 180, 1)
