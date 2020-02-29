@@ -6,6 +6,7 @@ local TRANSITION_SPEED = 3
 local computerfont = resource.load_font("Computerfont.ttf")
 local cpmono = resource.load_font("CPMono_v07_Plain.otf")
 
+local xtrans = 0
 local ytrans = 0
 local atrans = 0
 local bgtrans = - 1
@@ -77,6 +78,26 @@ function node.render()
             end
             start_time = sys.now()
         end
+    elseif screen == "initial" and next_screen == "next" and transition then
+        resource.render_child("next_title"):draw(0, -180 + ytrans, 1024, 0 + ytrans, 1)
+        
+        transition_step = transition_step + TRANSITION_SPEED
+        ytrans = 1.75 * transition_step
+        
+        if transition_step >= 100 then
+            transition = false
+            ytrans = 0
+            atrans = - 1
+            transition_step = 0
+            screen = "next"
+            if scheduled_screen == nil then
+                next_screen = "title"
+            else
+                next_screen = scheduled_screen
+                scheduled_screen = nil
+            end
+            start_time = sys.now()
+        end
     elseif screen == "initial" and next_screen == "background" and transition then
         bgtrans = bgtrans - 0.025
         
@@ -122,6 +143,28 @@ function node.render()
             ytrans = 0
             transition_step = 0
             screen = "talks"
+            if scheduled_screen == nil then
+                next_screen = "title"
+            else
+                next_screen = scheduled_screen
+                scheduled_screen = nil
+            end
+            start_time = sys.now()
+        end
+    elseif screen == "title" and next_screen == "next" and transition then
+        resource.render_child("title_background"):draw(0, 0, 1024, 350, 1 + atrans)
+        resource.render_child("next_title"):draw(0, 350 + ytrans, 1024, 600 + (ytrans*1.2), 0 - atrans)
+        resource.render_child("title_screen"):draw(0, 350 + ytrans, 1024, 600 + (ytrans*1.2), 1 + atrans)
+        
+        transition_step = transition_step + TRANSITION_SPEED
+        ytrans = - 3.5 * transition_step
+        atrans = - 0.01 * transition_step
+        
+        if transition_step >= 100 then
+            transition = false
+            ytrans = 0
+            transition_step = 0
+            screen = "next"
             if scheduled_screen == nil then
                 next_screen = "title"
             else
@@ -181,6 +224,83 @@ function node.render()
     elseif screen == "talks" and next_screen == "initial" and transition then
         resource.render_child("talks_title"):draw(0, 0 + ytrans, 1024, 180 + ytrans)
         resource.render_child("talks_screen"):draw(0, 180, 1024, 600, 1 + atrans)
+        
+        transition_step = transition_step + TRANSITION_SPEED
+        ytrans = - 2.25 * transition_step
+        atrans = - 0.01 * transition_step
+        if transition_step >= 100 then
+            transition = false
+            transition_step = 0
+            ytrans = 0
+            screen = "initial"
+            next_screen = "background"
+            start_time = sys.now()
+        end
+    elseif screen == "talks" and next_screen == "next" and transition then
+        resource.render_child("talks_title"):draw(0 + xtrans, 0, 1024 + xtrans, 180, 1)
+        resource.render_child("talks_screen"):draw(0 + xtrans, 180, 1024 + xtrans, 600, 1)
+        resource.render_child("next_title"):draw(1024 + xtrans, 0, 2048 + xtrans, 180, 1)
+        resource.render_child("next_screen"):draw(1024 + xtrans, 180, 2048 + xtrans, 600)
+        transition_step = transition_step + TRANSITION_SPEED
+        xtrans = - 10.04 * transition_step
+        if transition_step >= 100 then
+            transition = false
+            transition_step = 0
+            xtrans = 0
+            screen = "next"
+            next_screen = "title"
+            start_time = sys.now()
+        end
+    elseif screen == "next" and not transition then
+        resource.render_child("next_title"):draw(0, 0, 1024, 180, 1)
+        resource.render_child("next_screen"):draw(0, 180, 1024, 600, 1 + atrans)
+        
+        if atrans < 0 then
+            atrans = atrans + 0.025
+        end
+        
+        if sys.now() > start_time + TRANSITION_TIMEOUT then
+            transition = true
+        end
+    elseif screen == "next" and next_screen == "title" and transition then
+        resource.render_child("next_screen"):draw(0, 180, 1024, 600, 1 + atrans)
+        resource.render_child("next_title"):draw(0, 0 - ytrans, 1024, 180 - (ytrans*1.2), 1 + atrans)
+        resource.render_child("title_screen"):draw(0, 0 - ytrans, 1024, 180 - (ytrans*1.2), 0 - atrans)
+        
+        transition_step = transition_step + TRANSITION_SPEED
+        ytrans = - 3.5 * transition_step
+        atrans = - 0.01 * transition_step
+        if transition_step >= 100 then
+            transition = false
+            transition_step = 0
+            ytrans = 0
+            screen = "title"
+            if scheduled_screen == nil then
+                next_screen = "next"
+            else
+                next_screen = scheduled_screen
+                scheduled_screen = nil
+            end
+            start_time = sys.now()
+        end
+    elseif screen == "next" and next_screen == "talks" and transition then
+        resource.render_child("next_title"):draw(0 + xtrans, 0, 1024 + xtrans, 180, 1)
+        resource.render_child("next_screen"):draw(0 + xtrans, 180, 1024 + xtrans, 600, 1)
+        resource.render_child("talks_title"):draw(-1024 + xtrans, 0, 0 + xtrans, 180, 1)
+        resource.render_child("talks_screen"):draw(-1024 + xtrans, 180, 0 + xtrans, 600)
+        transition_step = transition_step + TRANSITION_SPEED
+        xtrans = 10.04 * transition_step
+        if transition_step >= 100 then
+            transition = false
+            transition_step = 0
+            xtrans = 0
+            screen = "talks"
+            next_screen = "title"
+            start_time = sys.now()
+        end
+    elseif screen == "next" and next_screen == "initial" and transition then
+        resource.render_child("next_title"):draw(0, 0 + ytrans, 1024, 180 + ytrans)
+        resource.render_child("next_screen"):draw(0, 180, 1024, 600, 1 + atrans)
         
         transition_step = transition_step + TRANSITION_SPEED
         ytrans = - 2.25 * transition_step
