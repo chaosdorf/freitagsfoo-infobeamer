@@ -25,6 +25,12 @@ You'll need to switch to a different screen to see anything meaningful:
 echo -n "freitagsfoo/screen:title" | nc -u localhost 4444
 ```
 
+If the state becomes invalid somehow, you can reset the software:
+
+```
+echo -n "freitagsfoo/reset:true" | nc -u localhost 4444
+```
+
 ## background
 
 You need to configura a background by adding a child package called `background`. A simple background which just paints a black screen is included.

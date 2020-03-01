@@ -6,16 +6,20 @@ local TRANSITION_SPEED = 3
 local computerfont = resource.load_font("Computerfont.ttf")
 local cpmono = resource.load_font("CPMono_v07_Plain.otf")
 
-local xtrans = 0
-local ytrans = 0
-local atrans = 0
-local bgtrans = - 1
-local transition = false
-local transition_step = 0 -- to 102
-local screen = "background"
-local next_screen = "background"
-local scheduled_screen = nil
-local start_time = sys.now()
+-- resets the variables containing our state to the inital values
+function init_state()
+    xtrans = 0
+    ytrans = 0
+    atrans = 0
+    bgtrans = - 1
+    transition = false
+    transition_step = 0 -- to 102
+    screen = "background"
+    next_screen = "background"
+    scheduled_screen = nil
+    start_time = sys.now()
+end
+init_state()
 
 -- colored rectangle
 local bluerect = resource.create_colored_texture(1, 1, 1, 1)
@@ -309,6 +313,10 @@ node.event("data", function(data, suffix)
             -- schedule the change for after the current transition,
             -- so that it doesn't get lost
             scheduled_screen = data
+        end
+    elseif suffix == "reset" then
+        if data == "true" then
+            init_state()
         end
     end
 end)
