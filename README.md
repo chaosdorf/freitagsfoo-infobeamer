@@ -25,7 +25,13 @@ You'll need to switch to a different screen to see anything meaningful:
 echo -n "freitagsfoo/screen:title" | nc -u localhost 4444
 ```
 
-If the state becomes invalid somehow, you can reset the software:
+If the state becomes invalid somehow, you'll see this screen:
+
+> ![screenshot4](screenshot4.png)
+> 
+> *error screen*
+
+In this case you can reset the software:
 
 ```
 echo -n "freitagsfoo/reset:true" | nc -u localhost 4444
