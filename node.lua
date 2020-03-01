@@ -2,6 +2,7 @@ gl.setup(1024, 600)
 
 local TRANSITION_TIMEOUT = 10
 local TRANSITION_SPEED = 3
+local ERROR_TIMEOUT = 60
 
 local computerfont = resource.load_font("Computerfont.ttf")
 local cpmono = resource.load_font("CPMono_v07_Plain.otf")
@@ -18,6 +19,7 @@ function init_state()
     next_screen = "background"
     scheduled_screen = nil
     start_time = sys.now()
+    error = false
 end
 init_state()
 
@@ -282,12 +284,20 @@ function node.render()
             next_screen = "background"
             start_time = sys.now()
         end
-    else
+    elseif error == true then
+        local time_to_restart = ERROR_TIMEOUT - (sys.now() - start_time)
         bgtrans = 0
         computerfont:write(100, 50, ":-(", 200, 1, 1, 1, 1)
         cpmono:write(50, 300, "Something happened.", 50, 1, 1, 1, 1, 1)
         cpmono:write(15, 450, "Unexpected state: screen=" .. screen .. ", next_screen=" .. next_screen .. ", transition=" .. tostring(transition), 20, 1, 1, 1, 1, 1)
+        cpmono:write(15, 475, "The software will restart in " .. math.ceil(time_to_restart) .. " seconds.", 20, 1, 1, 1, 1, 1)
         cpmono:write(5, 550, "Please create an issue at https://github.com/chaosdorf/freitagsfoo-infobeamer/", 20, 1, 1, 1, 1, 1)
+        if time_to_restart <= 0 then
+            init_state()
+        end
+    else
+        error = true
+        start_time = sys.now()
     end
 end
 

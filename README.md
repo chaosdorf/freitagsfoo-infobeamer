@@ -31,7 +31,7 @@ If the state becomes invalid somehow, you'll see this screen:
 > 
 > *error screen*
 
-In this case you can reset the software:
+In this case you can either wait for the software to reset itself or you can do it manually:
 
 ```
 echo -n "freitagsfoo/reset:true" | nc -u localhost 4444
