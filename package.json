@@ -2,5 +2,9 @@
     "name": "Freitagsfoo",
     "author": "Chaosdorf",
     "desc": "This software is meant to be used on info-beamer during a Freitagsfoo.",
-    "repository": "https://github.com/chaosdorf/freitagsfoo-infobeamer"
+    "repository": "https://github.com/chaosdorf/freitagsfoo-infobeamer",
+    "offline": {
+        "support": "no",
+        "info": "This package needs to fetch data about talks and hosts to display something useful"
+    }
 }
