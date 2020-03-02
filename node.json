@@ -4,8 +4,17 @@
         "network": "needs to fetch talk data"
     },
     "optional": [
+        ".gitignore",
+        "freitagsfoo.default.json",
+        "package.png",
+        "pesthoernchen.svg",
         "README.md",
         "screenshot-*.png",
+        "next_screen/README.md",
+        "next_screen/screenshot.png",
+        "next_title/README.md",
+        "next_title/screenshot.png",
+        "simple_background/README.md",
         "talks_screen/README.md",
         "talks_screen/screenshot.png",
         "talks_title/README.md",
@@ -13,10 +22,6 @@
         "title_background/README.md",
         "title_background/screenshot.png",
         "title_screen/README.md",
-        "title_screen/screenshot.png",
-        "python/README.md",
-        "python/freitagsfoo.py",
-        "python/requirements.txt",
-        "package.png"
+        "title_screen/screenshot.png"
     ]
 }
