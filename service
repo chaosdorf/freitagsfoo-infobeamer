@@ -13,8 +13,11 @@ from requests import Session
 import json
 import shutil
 import os
+import sys
+import platform
 
 URL = "https://www.chaosdorf.de/~ytvwld/freitagsfoo.json"
+FFTALKS_BASE_URL = "https://fftalks.chaosdorf.space/"
 LOADING_DATA = {
     "hosts": ["..."],
     "date": str(date.today()),
@@ -24,6 +27,31 @@ LOADING_DATA = {
         "persons": [],
     }]
 }
+
+
+session = Session()
+
+
+def post_exception(type, value, traceback):
+    """
+    Post an exception to fftalks.
+    
+    But just do this if it's noteworthy which means:
+     * We're running on info-beamer hosted.
+     * This is not a KeyboardInterrupt.
+    """
+    if type == KeyboardInterrupt:
+        return
+    print("exception:", type, value, traceback)
+    hostname = platform.node()
+    if hostname.startswith("info-beamer"):
+        session.post(FFTALKS_BASE_URL + "pi/error", json={
+            "source": "python",
+            "exc_info": (type, value, traceback),
+            "hostname": hostname,
+        })
+    else:
+        print("Not running on an info-beamer, so not logging exception.")
 
 
 def save_bytes(content):
@@ -38,9 +66,13 @@ def save_bytes(content):
     os.remove(filename)
 
 
+# try to POST exceptions when crashing
+sys.excepthook = post_exception
+
+# first, save dummy data
 save_bytes(json.dumps(LOADING_DATA))
 
-session = Session()
+# then, repeatetly fetch the real data
 while True:
     r = session.get(URL)
     save_bytes(r.text)
