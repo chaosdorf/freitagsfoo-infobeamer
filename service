@@ -1,4 +1,11 @@
 #!/usr/bin/python2.7
+# -*- coding: utf-8 -*-
+from __future__ import (
+    absolute_import, division, print_function, unicode_literals
+)
+from io import open
+# let's just pretend that this is Python 3
+
 
 from time import sleep, time
 from datetime import date
@@ -19,10 +26,10 @@ LOADING_DATA = {
 }
 
 
-def save_text(content):
+def save_bytes(content):
     curr_time = time()
     filename = "freitagsfoo-%s.json" % str(curr_time)
-    f = open(filename, "w")
+    f = open(filename, "wb")
     f.write(content)
     f.close()
     shutil.copy(filename, "freitagsfoo.json")
@@ -31,10 +38,10 @@ def save_text(content):
     os.remove(filename)
 
 
-save_text(json.dumps(LOADING_DATA))
+save_bytes(json.dumps(LOADING_DATA))
 
 session = Session()
 while True:
     r = session.get(URL)
-    save_text(r.text)
+    save_bytes(r.text)
     sleep(60)
