@@ -2,15 +2,15 @@
 
 This software is meant to be used on info-beamer during a [Freitagsfoo](https://wiki.chaosdorf.de/Freitagsfoo).
 
-> ![screenshot](screenshot.png)
+> ![screenshot](screenshot-1.png)
 > 
 > *title screen*
 
-> ![screenshot2](screenshot2.png)
+> ![screenshot2](screenshot-2.png)
 > 
 > *talks screen*
 
-> ![screenshot3](screenshot3.png)
+> ![screenshot3](screenshot-3.png)
 > 
 > *next talk screen*
 
@@ -27,7 +27,7 @@ echo -n "freitagsfoo/screen:title" | nc -u localhost 4444
 
 If the state becomes invalid somehow, you'll see this screen:
 
-> ![screenshot4](screenshot4.png)
+> ![screenshot4](screenshot-4.png)
 > 
 > *error screen*
 

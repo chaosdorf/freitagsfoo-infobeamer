@@ -5,8 +5,7 @@
     },
     "optional": [
         "README.md",
-        "screenshot.png",
-        "screenshot2.png",
+        "screenshot-*.png",
         "talks_screen/README.md",
         "talks_screen/screenshot.png",
         "talks_title/README.md",
