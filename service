@@ -24,6 +24,8 @@ LOADING_DATA = {
         "persons": [],
     }]
 }
+FILENAME = "freitagsfoo.json"
+FOLDERS_TO_WRITE = (".", "talks_screen", "title_screen", "next_screen")
 
 
 def save_bytes(content):
@@ -32,10 +34,8 @@ def save_bytes(content):
     f = open(filename, "wb")
     f.write(content)
     f.close()
-    shutil.copy(filename, "freitagsfoo.json")
-    shutil.copy(filename, "talks_screen/freitagsfoo.json")
-    shutil.copy(filename, "title_screen/freitagsfoo.json")
-    shutil.copy(filename, "next_screen/freitagsfoo.json")
+    for folder in FOLDERS_TO_WRITE:
+        shutil.copy(filename, "{}/{}".format(folder, FILENAME))
     os.remove(filename)
 
 
