@@ -35,6 +35,7 @@ def save_bytes(content):
     shutil.copy(filename, "freitagsfoo.json")
     shutil.copy(filename, "talks_screen/freitagsfoo.json")
     shutil.copy(filename, "title_screen/freitagsfoo.json")
+    shutil.copy(filename, "next_screen/freitagsfoo.json")
     os.remove(filename)
 
 
