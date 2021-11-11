@@ -1,12 +1,4 @@
-#!/usr/bin/python2.7
-# -*- coding: utf-8 -*-
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
-from io import open
-# let's just pretend that this is Python 3
-
-
+#!/usr/bin/python3
 from time import sleep, time
 from datetime import date
 from requests import Session
@@ -39,7 +31,7 @@ def save_bytes(content):
     os.remove(filename)
 
 
-save_bytes(json.dumps(LOADING_DATA))
+save_bytes(json.dumps(LOADING_DATA).encode())
 
 session = Session()
 while True:
