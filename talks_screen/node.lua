@@ -47,9 +47,6 @@ function node.render()
             if num_ > 1 then
                 line_offset = line_offset + 1
             end
-            
-            usericon:draw(40, (row*2.5+1)*39, 80, (row*2.5+1)*39+40, opacity)
-            cpmono:write(100, (row*2.5+1)*40, persons_string, 32, 1, 1, 1, opacity)
         end
     end
     
