@@ -1,5 +1,4 @@
-#!/usr/bin/python2.7
-
+#!/usr/bin/python3
 from time import sleep, time
 from datetime import date
 from requests import Session
@@ -17,24 +16,25 @@ LOADING_DATA = {
         "persons": [],
     }]
 }
+FILENAME = "freitagsfoo.json"
+FOLDERS_TO_WRITE = (".", "talks_screen", "title_screen", "next_screen")
 
 
-def save_text(content):
+def save_bytes(content):
     curr_time = time()
     filename = "freitagsfoo-%s.json" % str(curr_time)
-    f = open(filename, "w")
+    f = open(filename, "wb")
     f.write(content)
     f.close()
-    shutil.copy(filename, "freitagsfoo.json")
-    shutil.copy(filename, "talks_screen/freitagsfoo.json")
-    shutil.copy(filename, "title_screen/freitagsfoo.json")
+    for folder in FOLDERS_TO_WRITE:
+        shutil.copy(filename, "{}/{}".format(folder, FILENAME))
     os.remove(filename)
 
 
-save_text(json.dumps(LOADING_DATA))
+save_bytes(json.dumps(LOADING_DATA).encode())
 
 session = Session()
 while True:
     r = session.get(URL)
-    save_text(r.text)
+    save_bytes(r.content)
     sleep(60)
