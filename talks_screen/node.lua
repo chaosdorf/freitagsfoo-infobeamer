@@ -53,7 +53,7 @@ function node.render()
         end
     end
     
-    cpmono:write(20, 570, "Add yours at https://wiki.chaosdorf.de/18_Jahre_Chaosdorf_Lightningtalks", 21, 1, 1, 1, 1, 1)
+    cpmono:write(20, 570, "Add yours at https://wiki.chaosdorf.de/Einweihungsfeier/Lightningtalks", 21, 1, 1, 1, 1, 1)
 end
 
 util.file_watch("freitagsfoo.json", function(content)
