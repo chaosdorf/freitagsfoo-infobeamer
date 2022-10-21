@@ -51,6 +51,8 @@ def break_up_line(line: str) -> list:
                 break
             words.pop(0)
             curr_line = speculative_line
+        else:
+            lines.append(curr_line)
     return lines
 
 
