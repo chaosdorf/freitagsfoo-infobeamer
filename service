@@ -31,10 +31,35 @@ def save_bytes(content):
     os.remove(filename)
 
 
+def break_up_text(text: str) -> str:
+    lines = []
+    for line in text.splitlines():
+        lines += break_up_line(line)
+    return "\n".join(lines)
+
+
+def break_up_line(line: str) -> list:
+    lines = []
+    curr_line = ""
+    words = line.split(" ")
+    while words:
+        for word in words[:]:
+            speculative_line = curr_line + " " + word
+            if len(speculative_line) >= 50:
+                lines.append(curr_line)
+                curr_line = ""
+                break
+            words.pop(0)
+            curr_line = speculative_line
+    return lines
+
+
 save_bytes(json.dumps(LOADING_DATA).encode())
 
 session = Session()
 while True:
-    r = session.get(URL)
-    save_bytes(r.content)
+    data = session.get(URL).json()
+    for talk in data["talks"]:
+        talk["description"] = break_up_text(talk["description"])
+    save_bytes(json.dumps(data, ensure_ascii=False).encode())
     sleep(60)
