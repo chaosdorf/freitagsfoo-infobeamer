@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 from time import sleep, time
+from contextlib import suppress
 from datetime import date
 from requests import Session
-import paho.mqtt.client
 import json
 import shutil
 import os
@@ -59,6 +59,10 @@ def break_up_line(line: str) -> list:
 
 save_bytes(json.dumps(LOADING_DATA).encode())
 
+with suppress(FileNotFoundError):
+    shutil.rmtree("paho")
+shutil.copytree("paho.mqtt.python/src/paho", "paho")
+import paho.mqtt.client
 mqtt = paho.mqtt.client.Client()
 mqtt.connect("mqttserver.chaosdorf.space")
 mqtt.loop_start()
