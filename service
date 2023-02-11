@@ -1,12 +1,16 @@
 #!/usr/bin/python3
+from io import BytesIO
 from time import sleep, time
 from contextlib import suppress
 from datetime import date
+from pathlib import Path
 from requests import Session
 import json
 import shutil
+import tarfile
 import os
 
+PAHO_URL = "https://github.com/eclipse/paho.mqtt.python/archive/refs/tags/v1.6.1.tar.gz"
 URL = "https://www.chaosdorf.de/~ytvwld/freitagsfoo.json"
 LOADING_DATA = {
     "hosts": ["..."],
@@ -57,18 +61,28 @@ def break_up_line(line: str) -> list:
     return lines
 
 
-save_bytes(json.dumps(LOADING_DATA).encode())
+def download_and_extract_paho(session):
+    req = session.get(PAHO_URL)
+    req.raise_for_status()
+    with tarfile.open(fileobj=BytesIO(req.content), mode="r:gz") as tar:
+        folder = Path(tar.firstmember.name)
+        tar.extractall()
+    shutil.copytree(folder / "src/paho", "paho")
+    shutil.rmtree(folder)
 
-with suppress(FileNotFoundError):
-    shutil.rmtree("paho")
-shutil.copytree("paho.mqtt.python/src/paho", "paho")
+
+save_bytes(json.dumps(LOADING_DATA).encode())
+session = Session()
+
+if not os.path.exists("paho"):
+    download_and_extract_paho(session)
+
 import paho.mqtt.client
 mqtt = paho.mqtt.client.Client()
 mqtt.connect("mqttserver.chaosdorf.space")
 mqtt.loop_start()
 mqtt.publish("freitagsfoo/infobeamer/serial", os.environ.get("SERIAL"))
 
-session = Session()
 while True:
     data = session.get(URL).json()
     for talk in data["talks"]:
