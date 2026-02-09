@@ -344,5 +344,5 @@ local json = require "json"
 
 util.file_watch("config.json", function(content)
     local config = json.decode(content)
-    load_music(config["background_music"])
+    load_music(config["background_music"]["asset_name"])
 end)
