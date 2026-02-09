@@ -7,6 +7,14 @@ local ERROR_TIMEOUT = 60
 local computerfont = resource.load_font("Computerfont.ttf")
 local cpmono = resource.load_font("CPMono_v07_Plain.otf")
 
+function load_music(filename)
+    music = resource.load_audio{
+        file = filename;
+        looped = true;
+    }
+    music:start()
+end
+
 -- resets the variables containing our state to the inital values
 function init_state()
     xtrans = 0
@@ -20,6 +28,7 @@ function init_state()
     scheduled_screen = nil
     start_time = sys.now()
     error = false
+    load_music("empty.mp3")
 end
 init_state()
 
@@ -329,4 +338,11 @@ node.event("data", function(data, suffix)
             init_state()
         end
     end
+end)
+
+local json = require "json"
+
+util.file_watch("config.json", function(content)
+    local config = json.decode(content)
+    load_music(config["background_music"])
 end)

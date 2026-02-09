@@ -23,5 +23,13 @@
         "title_background/screenshot.png",
         "title_screen/README.md",
         "title_screen/screenshot.png"
+    ],
+    "options": [
+      {
+        "title": "background music",
+        "name": "background_music",
+        "type": "resource",
+        "default": "empty.mp3"
+      }
     ]
 }
