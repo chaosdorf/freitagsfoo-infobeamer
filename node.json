@@ -30,7 +30,7 @@
         "name": "background_music",
         "type": "resource",
         "default": "empty.mp3",
-        "valid": ["image"]
+        "valid": ["audio"]
       }
     ]
 }
