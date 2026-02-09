@@ -8,11 +8,16 @@ local computerfont = resource.load_font("Computerfont.ttf")
 local cpmono = resource.load_font("CPMono_v07_Plain.otf")
 
 function load_music(filename)
-    music = resource.load_audio{
-        file = filename;
-        looped = true;
-    }
-    music:start()
+    if sys.provides "audio" then
+        print("loading music")
+        music = resource.load_audio{
+            file = filename;
+            looped = true;
+        }
+        music:start()
+    else
+        print("device does not support audio")
+    end
 end
 
 -- resets the variables containing our state to the inital values
@@ -341,10 +346,5 @@ node.event("data", function(data, suffix)
 end)
 
 util.json_watch("config.json", function(config)
-    print("loading music")
-    if sys.provides "audio" then
-        load_music(config.background_music.asset_name)
-    else
-        print("device does not support audio")
-    end
+    load_music(config.background_music.asset_name)
 end)
