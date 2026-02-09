@@ -28,8 +28,7 @@
       {
         "title": "background music",
         "name": "background_music",
-        "type": "resource",
-        "default": "empty.mp3"
+        "type": "resource"
       }
     ]
 }
