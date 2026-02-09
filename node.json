@@ -28,7 +28,9 @@
       {
         "title": "background music",
         "name": "background_music",
-        "type": "resource"
+        "type": "resource",
+        "default": "empty.mp3",
+        "valid": ["image"]
       }
     ]
 }
