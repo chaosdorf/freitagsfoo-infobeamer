@@ -341,5 +341,10 @@ node.event("data", function(data, suffix)
 end)
 
 util.json_watch("config.json", function(config)
-    load_music(config.background_music.asset_name)
+    print("loading music")
+    if sys.provides "audio" then
+        load_music(config.background_music.asset_name)
+    else
+        print("device does not support audio")
+    end
 end)
