@@ -340,9 +340,6 @@ node.event("data", function(data, suffix)
     end
 end)
 
-local json = require "json"
-
-util.file_watch("config.json", function(content)
-    local config = json.decode(content)
-    load_music(config["background_music"]["asset_name"])
+util.json_watch("config.json", function(config)
+    load_music(config.background_music.asset_name)
 end)
